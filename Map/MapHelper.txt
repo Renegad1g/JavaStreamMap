@@ -1,0 +1,30 @@
+package sortmapvalues;
+
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *
+ * @author ****
+ */
+public class MapHelper {
+    public static <K, V extends Comparable<? super V>> Map<K, V> 
+        sortByValue(Map<K, V> map )
+        {
+            //Переписываем значения из карты в список
+            List<Map.Entry<K, V>> list =
+                new LinkedList<>(map.entrySet());
+            //Сортируем элементы списка по правилу, описанному в теле лямбды (от большего к меньшему)
+            Collections.sort(list, (Map.Entry<K, V> o1, Map.Entry<K, V> o2) -> (o2.getValue()).compareTo( o1.getValue() ));
+            //Переписываем отсортированные значения в карту и возвращаем ее
+            Map<K, V> result = new LinkedHashMap<>();
+            list.stream().forEach((entry) -> {
+                result.put(entry.getKey(), entry.getValue());
+            });
+            return result;
+        }
+}
+\

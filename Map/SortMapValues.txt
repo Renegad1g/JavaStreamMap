@@ -1,0 +1,43 @@
+package sortmapvalues;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
+/**
+ *
+ * @author ****
+ */
+public class SortMapValues {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        int countInt = 0;
+        Random random=new Random(System.currentTimeMillis());
+        String [] cities={"Kiev","Moscow","Washington","Minsk","Mexico","Quebec","Paris","Berlin","Warsaw","Prague"};
+        Map<String,Integer> map = new HashMap <>();
+        for (String citie : cities) {
+            map.put(citie, random.nextInt(5000)+1000);
+        }              
+        //Используем наш вспомогательный класс для сортировки
+        map.entrySet().stream().forEach((entry) -> {
+            System.out.println(entry.getKey() + " : " + entry.getValue() + "\n");
+        });
+        System.out.println("************\n");
+        //Используем наш вспомогательный класс для сортировки
+        //TODO: добавить в sortByValue еще один параметр - направление сортировки
+        map = MapHelper.sortByValue(map);
+        //Создаем итератор для простого перебора пар карты
+        Iterator iterator = map.entrySet().iterator();
+        while (iterator.hasNext() && countInt < 3) {
+            Entry entry = (Entry) iterator.next();
+            System.out.println(entry.getKey() + " : " + entry.getValue() + "\n");
+            countInt++;
+        }
+    }
+    
+}
